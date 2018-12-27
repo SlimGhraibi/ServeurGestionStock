@@ -2,6 +2,8 @@ package com.example.demo.entities;
 
 import javax.persistence.*;
 
+import com.example.demo.util.RoleEnum;
+
 @Entity
 public class Role {
 
@@ -16,9 +18,9 @@ public class Role {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(String name) {
+	public Role(RoleEnum roleEnum) {
 		super();
-		this.name = name;
+		this.name = roleEnum.getName();
 	}
 
 	@Override
