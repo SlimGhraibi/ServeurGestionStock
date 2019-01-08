@@ -7,31 +7,23 @@ import javax.persistence.*;
 @Entity
 public class User {
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="USER_ID")
 	private Long id;
-	@Column(unique = true)
-	private String username;
-	private String password;
-	/* un attribut enable pour activer et désactiver l'utilisateur */
-	private Boolean enable;
-	/* un utilisateur peut avoir plusieur role : user & admin*/
-	/* à chaque select d'un user de la BD on collecte directement ses roles ; par contre lazy, si on collecte un user pas forcément on collecte ses role*/ 
-	@ManyToMany(fetch=FetchType.EAGER)  
-	@JoinTable(name="USER_ROLES", joinColumns= {@JoinColumn(name="USER_ID")}, inverseJoinColumns= {@JoinColumn(name="ROLE_ID")})									
-	private List<Role> roles = new ArrayList<>();
 	
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public User(String username, String password, Boolean enable) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.enable = enable;
-	}
+	@Column(unique=true)
+	private String username;
+	
+	private String password;
+	
+	private boolean enable;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="USERS_ROLES",
+	joinColumns={@JoinColumn(name="USER_ID")},
+	inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
+	private List<Role> roles;
 
 	@Override
 	public int hashCode() {
@@ -58,6 +50,18 @@ public class User {
 		return true;
 	}
 
+	public User(String username, String password, boolean enable) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.enable = enable;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -82,11 +86,11 @@ public class User {
 		this.password = password;
 	}
 
-	public Boolean getEnable() {
+	public boolean isEnable() {
 		return enable;
 	}
 
-	public void setEnable(Boolean enable) {
+	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
 
@@ -97,6 +101,5 @@ public class User {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
 	
 }

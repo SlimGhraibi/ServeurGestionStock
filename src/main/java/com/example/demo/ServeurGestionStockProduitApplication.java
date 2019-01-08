@@ -6,11 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-
+import com.example.demo.entities.Produit;
 import com.example.demo.entities.Role;
 import com.example.demo.entities.User;
+import com.example.demo.repository.ProduitRepository;
 import com.example.demo.repository.RoleRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.util.RoleEnum;
 /*
  * all packages should be in : com.example.demo*/
 @SpringBootApplication
@@ -20,35 +22,34 @@ public class ServeurGestionStockProduitApplication {
 		
 	//Démarrage de spring container
 	SpringApplication.run(ServeurGestionStockProduitApplication.class, args);
+	/*
+	ConfigurableApplicationContext ctx = SpringApplication.run(ServeurGestionStockProduitApplication.class, args);
 	
-	/**
-	 * 
-	 * 
-	 * **/
-    //ConfigurableApplicationContext ctx = SpringApplication.run(ServeurGestionStockProduitApplication.class, args);
-	/* creer un bean du repository UserRepository qui est annoté @Repository*/	
-	//RoleRepository roleRepository = ctx.getBean(RoleRepository.class);
+	ProduitRepository produitRepository = ctx.getBean(ProduitRepository.class);
 	
-	/* creation des deux roles */
-	//Role roleUser = new Role("ROLE_USER");
-	//Role roleAdmin = new Role("ROLE_ADMIN");
+	produitRepository.save(new Produit("Livre", 50, 20));
+	produitRepository.save(new Produit("Cahier", 200, 5.25f));
+	produitRepository.save(new Produit("Stylo", 500, 2.10f));
 	
-	/* persister les deux roles */
-	//roleRepository.save(roleUser);
-	//roleRepository.save(roleAdmin);
+	RoleRepository roleRepository = ctx.getBean(RoleRepository.class);
 	
-	/* creer un bean du repository UserRepository */
-	//UserRepository userRepository = ctx.getBean(UserRepository.class);
+	Role roleUser = new Role(RoleEnum.ROLE_USER);
+	Role roleAdmin = new Role(RoleEnum.ROLE_ADMIN);
 	
-	/* creation des deux utilisateurs */
-	//User user = new User("user", "user",true);
-	//User admin = new User("admin", "admin",true);
+	roleRepository.save(roleUser);
+	roleRepository.save(roleAdmin);
 	
-	/* affectation des roles au utilisateurs creés */
-	//user.setRoles(Arrays.asList(roleUser));
-	//userRepository.save(user);
+	UserRepository userRepository = ctx.getBean(UserRepository.class);
 	
-	//admin.setRoles(Arrays.asList(roleAdmin));
-	//userRepository.save(admin);
+	User user = new User("user", "user", true);
+	user.setRoles(Arrays.asList(roleUser));
+	
+	userRepository.save(user);
+	
+	User admin = new User("admin", "admin", true);
+	admin.setRoles(Arrays.asList(roleUser, roleAdmin));
+	
+	userRepository.save(admin);
+	*/
 	}
 }

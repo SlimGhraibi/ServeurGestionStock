@@ -20,8 +20,11 @@ import com.example.demo.service.ICrudService;
 @RequestMapping("/api/produit")
 @CrossOrigin
 
-public class ProduitRestService  {
-
+public class ProduitRestService extends CrudController<Produit, Long> {
+	
+	/* on a crer une super class CrudController */
+	
+	/*
 	public ProduitRestService() {	
 	}
 
@@ -49,5 +52,6 @@ public class ProduitRestService  {
 	public void deleteProduit(@PathVariable Long id) {
 		// TODO Auto-generated method stub
 		produitService.deleteItem(id);
-	}	
+	}
+	*/	
 }

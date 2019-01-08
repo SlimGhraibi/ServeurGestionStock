@@ -16,32 +16,46 @@ import com.example.demo.service.ICrudService;
 
 @RestController
 @RequestMapping("/crud_user")
-public class CrudUserController {
-
+public class CrudUserController extends CrudController<User, Long>  {
+    
+/* le problème dans la récupération des users c'est q'on récupère le mot de passe, 
+ * on va fixer ca avec la redéfinition de cette méthode est fixé le passeword à null */
+	
+	public List<User> getAllItem(){
+		List<User> users = super.getAllItem();
+		users.forEach(user->{
+			user.setPassword(null);
+		});
+		return users;
+	}
+	
+	/* on a crer une super class CrudController */
+	
+	/*
 	@Autowired
 	private ICrudService<User, Long> userService;
 	
 	@GetMapping
-	public List<User> getProduits(){
+	public List<User> getUsers(){
 		return userService.getAllItem();
 	}
 	
 	@PostMapping
-	public void addProduit(@RequestBody User user) {
+	public void addUsers(@RequestBody User user) {
 		// TODO Auto-generated method stub
 		userService.addItem(user);
 	}
 	
 	@PutMapping
-	public void updateProduit(@RequestBody User user) {
+	public void updateUsers(@RequestBody User user) {
 		// TODO Auto-generated method stub
 		userService.updateItem(user);		
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteProduit(@PathVariable Long id) {
+	public void deleteUserst(@PathVariable Long id) {
 		// TODO Auto-generated method stub
 		userService.deleteItem(id);
 	}	
-	
+	*/
 }

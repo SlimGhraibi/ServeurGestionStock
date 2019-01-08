@@ -9,6 +9,6 @@ public interface ICrudService<T, ID> {
 	List<T> getAllItem();
 	void addItem(T entity);
 	void updateItem(T entity);
-	void deleteItem(Long id);
+	void deleteItem(ID id);
 
 }

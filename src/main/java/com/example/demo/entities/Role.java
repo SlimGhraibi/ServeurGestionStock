@@ -6,21 +6,22 @@ import com.example.demo.util.RoleEnum;
 
 @Entity
 public class Role {
-
-	@Id 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ROLE_ID")
 	private Long id;
-	private String name;
 	
+	private String name;
+
 	public Role() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Role(RoleEnum roleEnum) {
+	public Role(RoleEnum role) {
 		super();
-		this.name = roleEnum.getName();
+		this.name = role.getName();
 	}
 
 	@Override
@@ -63,7 +64,5 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
-	
+
 }

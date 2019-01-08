@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import java.util.List;
 
@@ -6,61 +6,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.Produit;
-import com.example.demo.entities.User;
 import com.example.demo.repository.ProduitRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.service.ICrudService;
 
 @Service
-public class UserService implements ICrudService<User, Long> {
+public class ProduitService implements ICrudService<Produit, Long> {
 
 	@Autowired
-	private UserRepository userRepository;
-	
+	private ProduitRepository produitRepository;
+
 
 	@Override
-	public List<User> getAllItem() {
+	public List<Produit> getAllItem() {
 		// TODO Auto-generated method stub
-		return userRepository.findAll();
+		return produitRepository.findAll();
 	}
 
 	@Override
-	public void addItem(User entity) {
+	public void addItem(Produit entity) {
 		// TODO Auto-generated method stub
-		userRepository.save(entity);
+		produitRepository.save(entity);
 		
 	}
 
 	@Override
-	public void updateItem(User entity) {
+	public void updateItem(Produit entity) {
 		// TODO Auto-generated method stub
-		userRepository.save(entity);
+		produitRepository.save(entity);
 	}
 
 	@Override
 	public void deleteItem(Long id) {
 		// TODO Auto-generated method stub
-		User user = new User();
-		user.setId(id);
-		userRepository.delete(user);
+		Produit p = new Produit();
+		p.setId(id);
+		produitRepository.delete(p);
 	}
 	
 	/*
 	@Override
 	public List<Produit> getProduits() {
 		// TODO Auto-generated method stub
-		return userRepository.findAll();
+		return produitRepository.findAll();
 	}
 
 	@Override
 	public void addProduit(Produit produit) {
 		// TODO Auto-generated method stub
-		userRepository.save(produit);
+		produitRepository.save(produit);
 	}
 
 	@Override
 	public void updateProduit(Produit produit) {
 		// TODO Auto-generated method stub
-		userRepository.save(produit);
+		produitRepository.save(produit);
 		
 	}
 
@@ -69,7 +68,9 @@ public class UserService implements ICrudService<User, Long> {
 		// TODO Auto-generated method stub
 		Produit p = new Produit();
 		p.setId(id);
-		userRepository.delete(p);
+		produitRepository.delete(p);
 	}
-	*/
+
+*/
+	
 }
