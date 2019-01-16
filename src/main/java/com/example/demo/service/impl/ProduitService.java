@@ -41,6 +41,8 @@ public class ProduitService implements ICrudService<Produit, Long> {
 		Produit p = new Produit();
 		p.setId(id);
 		produitRepository.delete(p);
+		System.out.println("produit deleted with succes !");
+
 	}
 	
 	/*

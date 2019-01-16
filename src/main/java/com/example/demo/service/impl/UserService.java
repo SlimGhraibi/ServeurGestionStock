@@ -43,6 +43,7 @@ public class UserService implements ICrudService<User, Long> {
 		User user = new User();
 		user.setId(id);
 		userRepository.delete(user);
+		System.out.println("user deleted with succes !");
 	}
 	
 	/*

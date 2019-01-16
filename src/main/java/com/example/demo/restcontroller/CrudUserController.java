@@ -1,5 +1,6 @@
 package com.example.demo.restcontroller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +12,36 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entities.Role;
 import com.example.demo.entities.User;
+import com.example.demo.repository.RoleRepository;
 import com.example.demo.service.ICrudService;
+import com.example.demo.util.RoleEnum;
 
 @RestController
 @RequestMapping("/crud_user")
 public class CrudUserController extends CrudController<User, Long>  {
     
-/* le problème dans la récupération des users c'est q'on récupère le mot de passe, 
- * on va fixer ca avec la redéfinition de cette méthode est fixé le passeword à null */
-	
+	@Autowired
+	private RoleRepository rolerepository;
+
+	/* Redéfinir la méthode get pour seter les mot de passe à null */
 	public List<User> getAllItem(){
 		List<User> users = super.getAllItem();
 		users.forEach(user->{
 			user.setPassword(null);
 		});
 		return users;
+	}
+	
+	/* Redéfinir la méthode add pour la creation des roles d'un nouveau utilisateur */
+	public void addItem(@RequestBody User user) {
+		// TODO Auto-generated method stub
+		Role role = rolerepository.findByName(RoleEnum.ROLE_USER.getName());
+		user.setRoles(Arrays.asList(role));
+        user.setEnable(true);
+		super.addItem(user);
 	}
 	
 	/* on a crer une super class CrudController */
